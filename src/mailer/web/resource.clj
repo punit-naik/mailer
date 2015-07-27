@@ -11,7 +11,7 @@
 (defresource send-mail
 :available-media-types ["application/json"]
 :allowed-methods [:post]
-:handle-created! (fn [ctx]
+:handle-created (fn [ctx]
 			(mail/send-mail (get-in ctx [:request :body])))
 )
 
@@ -29,4 +29,12 @@
 ;;curl -v -X GET http://localhost:3000/filter-mail -d '{"query":"Punit Naik"}' -H "Content-Type: application/json"
 :handle-ok (fn [ctx]
 		(getall/filter-mail (get-in ctx [:request :body])))
+)
+
+(defresource unsub
+:available-media-types ["application/json"]
+:allowed-methods [:put]
+;;curl -v -X PUT http://localhost:3000/unsubscribe -d '{"email":"naik.punit44@gmail.com"}' -H "Content-Type: application/json"
+:handle-created (fn [ctx]
+	(getall/unsub-mail (get-in ctx [:request :body])))
 )
