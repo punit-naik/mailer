@@ -4,8 +4,10 @@
 	)
 
 (defn get-mail [request]
-	(select db/maildata))
+	(select db/maildata
+		(fields :id :name :org :email)))
 
 (defn filter-mail [request]
 	(select db/maildata
-		(where (or {:name [like (:query request)]} {:org [like (:query request)]}))))
+		(fields :id :name :org :email)
+		(where (and {:active 1} (or {:name [like (str "%" (:query request) "%")]} {:org [like (str "%" (:query request) "%")]})))))
