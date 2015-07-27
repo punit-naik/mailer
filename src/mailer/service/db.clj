@@ -21,6 +21,6 @@
 
 ;; Entities
 
-(defentity mail-data
+(defentity maildata
 	(pk :id))
 

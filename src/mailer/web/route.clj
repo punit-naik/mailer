@@ -11,5 +11,6 @@
   (ANY "/" [_] "Welcome")
   (ANY "/send" request (res/send-mail request))
   (ANY "/get-all-records" request (res/get-all request))
+  (ANY "/filter-mail" request (res/filter-mail request))
   )
 
