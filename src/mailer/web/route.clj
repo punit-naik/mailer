@@ -13,5 +13,6 @@
   (ANY "/get-all-records" request (res/get-all request))
   (ANY "/filter-mail" request (res/filter-mail request))
   (ANY "/unsubscribe" request (res/unsub request))
+  (ANY "/upload-csv" request (res/upload-file request))
   )
 

@@ -19,3 +19,17 @@
 		(where {:email (:email request)}))
 	(generate-string {:status "You have been unsubscribed"})
 )
+
+(defn upload-csv [request]
+	(let [lines (clojure.string/split (slurp request) #"\n")]
+		(dorun
+			(for [l lines]
+				(do
+					(def parts (clojure.string/split l #","))
+					(insert db/maildata (values {:name (parts 0) :email (parts 1) :org (parts 2)}))
+					)
+				)
+			)
+		)
+	(generate-string {:status "New Entries have been added"})
+	)

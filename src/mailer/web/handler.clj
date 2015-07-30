@@ -7,6 +7,7 @@
             [taoensso.timbre :as timbre]
 	    [noir.session :as session]
             [taoensso.carmine.ring :refer [carmine-store]]
+	    [ring.middleware.multipart-params :refer [wrap-multipart-params]]
             [ring.middleware.params :refer [wrap-params]]))
 
 (timbre/refer-timbre)
@@ -15,4 +16,4 @@
 
 (def app
   (wrap-json-body (session/wrap-noir-session
-   (wrap-json-response (wrap-params r/app-routes))) {:keywords? true}))
+   (wrap-json-response (wrap-multipart-params (wrap-params r/app-routes)))) {:keywords? true}))

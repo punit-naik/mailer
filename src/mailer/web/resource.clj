@@ -38,3 +38,11 @@
 :handle-created (fn [ctx]
 	(getall/unsub-mail (get-in ctx [:request :body])))
 )
+
+(defresource upload-file
+:available-media-types ["application/json" "multipart/form-data"]
+:allowed-methods [:post]
+;;curl -v -X POST http://localhost:3000/upload-csv --upload-file Downloads/Punit.json
+:handle-created (fn [ctx]
+			(getall/upload-csv (get-in ctx [:request :body])))
+)
