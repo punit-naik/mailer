@@ -2,8 +2,9 @@
   (:require [liberator.core :refer [defresource]]
             [taoensso.timbre :as timbre]
             [cheshire.core :refer :all]
-	    [mailer.service.sendmail :as mail]
-	    [mailer.service.getall :as getall]))
+            [mailer.service.sendmail :as mail]
+            [mailer.service.getall :as getall]
+            [mailer.service.auth :as auth]))
 
 (timbre/refer-timbre)
 (timbre/merge-config! {:level :debug})
@@ -45,4 +46,13 @@
 ;;curl -v -X POST http://localhost:3000/upload-csv --upload-file Downloads/Punit.json
 :handle-created (fn [ctx]
 			(getall/upload-csv (get-in ctx [:request :body])))
+)
+
+(defresource login
+	:available-media-types ["application/json"]
+	:allowed-methods [:post]
+	:handle-created (fn [ctx]
+		(info (get-in ctx [:request]))
+		(auth/authenticate (get-in ctx [:request :params])))
+
 )

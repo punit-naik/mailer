@@ -24,3 +24,5 @@
 (defentity maildata
 	(pk :id))
 
+(defentity userdata
+	(pk :id))
