@@ -43,9 +43,13 @@
 (defresource upload-file
 :available-media-types ["application/json" "multipart/form-data"]
 :allowed-methods [:post]
-;;curl -v -X POST http://localhost:3000/upload-csv --upload-file Downloads/Punit.json
+;;curl -v -X POST http://localhost:3000/upload-csv --upload-file Desktop/data.csv
 :handle-created (fn [ctx]
-			(getall/upload-csv (get-in ctx [:request :body])))
+			(if (:username (:noir (:session request)))
+				(getall/upload-csv (get-in ctx [:request :body]))
+				(generate-string {:status "You are not logged in"})
+				)
+			)
 )
 
 (defresource login
