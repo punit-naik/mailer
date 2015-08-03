@@ -1,0 +1,52 @@
+(require '[clojurewerkz.scrypt.core :as sc])
+(sc/encrypt "secret" 12211 21 1)
+(sc/encrypt "secret" 16384 8 1)
+(def h (sc/encrypt "secret" 16384 8 1))
+(sc/verify "qwerty" h)
+(sc/verify "secret" h)
+h
+(sc/encrypt "secret" 16384 8 1)
+h
+(require '[crypto.password.scrypt :as password])
+(def encrypted (password/encrypt "qwerty"))
+encrypted
+(password/check "qwerty" "$s0$f0801$ol1S+TfLvS7Mcukw8DSO/w==$qZ7vn18YjyAu8zZnkgXFjTQ5uDy8luPywiyVI787Cm8=")
+(ns mailer.service.db
+(:require [taoensso.timbre :as timbre]
+            [environ.core :refer [env]]
+            [clojure.java.jdbc :as j]
+            [noir.session :as session])
+  (:use korma.db korma.core))
+(def db{:classname "com.mysql.jdbc.Driver"
+:subprotocol "mysql"
+:subname "//localhost:3306/mailer"
+:delimiters "`"
+:useUnicode "yes"
+:characterEncoding "UTF-8"
+:user "root"
+:password "root"})
+(defentity maildata
+(pk :id))
+(defentity userdata
+(pk :id))
+(select db/userdata)
+db
+(select db/userdata)
+(select userdata)
+db
+(select userdata)
+db
+(defdb korma-db db)
+(select userdata)
+(select userdata (fields :pass))
+(:pass (select userdata (fields :pass)))
+(def encrypted (password/encrypt "qwerty"))
+(require '[clojurewerkz.scrypt.core :as sc])
+(require '[crypto.password.scrypt :as password])
+(def encrypted (password/encrypt "qwerty"))
+excrypted
+encrypted
+(select userdata (fields :pass))
+(vec (select userdata (fields :pass)))
+(def pass ((vec (select userdata (fields :pass))) 0))
+pass

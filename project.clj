@@ -9,6 +9,7 @@
                            [ring/ring-defaults "0.1.4"]
                            [ring/ring-json "0.3.1"]
                            [enlive "1.1.5"]
+		           [crypto-password "0.1.3"]
                            [com.cemerick/friend "0.2.0"]
                            [friend-oauth2 "0.1.1"]
                            [environ "1.0.0"]
