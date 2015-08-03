@@ -9,9 +9,9 @@
 
 (defn authenticate [request]
 	(do
-		(def pass ((vec (select userdata (where {:username (get-in request ["username"])}) (fields :pass))) 0))
+		(def pass ((vec (select db/userdata (where {:username (get-in request ["username"])}) (fields :pass))) 0))
 		(if (not (empty? pass))
-			(if (password/check (get-in request ["pass"]) pass)
+			(if (password/check (get-in request ["pass"]) (:pass pass))
 				(do 
 					(session/put! :username (get-in request ["username"]))
 					;;render the upload-csv html page

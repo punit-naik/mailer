@@ -50,3 +50,6 @@ encrypted
 (vec (select userdata (fields :pass)))
 (def pass ((vec (select userdata (fields :pass))) 0))
 pass
+(require '[crypto.password.scrypt :as password])
+(def encrypted (password/encrypt "qwerty"))
+encrypted
