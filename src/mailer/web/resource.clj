@@ -4,6 +4,7 @@
             [cheshire.core :refer :all]
             [mailer.service.sendmail :as mail]
             [mailer.service.getall :as getall]
+	    [selmer.parser :refer [render-file]]
             [mailer.service.auth :as auth]))
 
 (timbre/refer-timbre)
@@ -53,10 +54,15 @@
 )
 
 (defresource login
-	:available-media-types ["application/json"]
-	:allowed-methods [:post]
+	:available-media-types ["application/json" "text/html"]
+	:allowed-methods [:post :get]
 	:handle-created (fn [ctx]
 		(info (get-in ctx [:request]))
 		(auth/authenticate (get-in ctx [:request :params])))
+	:handle-ok (fn [ctx]
+			(if (get-in ctx [:request :session :noir :username])
+				;;render the upload-csv html page
+				(generate-string {:status "You are authenticated"})
+				(render-file "public/login.html" {})))
 
 )
