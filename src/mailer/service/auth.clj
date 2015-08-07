@@ -19,6 +19,7 @@
 					)
 				(generate-string {:status "Username or Password not correct"})
 				)
+			(generate-string {:status "User not present"})
 			)
 		)
 	)
