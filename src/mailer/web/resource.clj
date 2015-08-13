@@ -61,7 +61,6 @@
 		(auth/authenticate (get-in ctx [:request :params])))
 	:handle-ok (fn [ctx]
 			(if (get-in ctx [:request :session :noir :username])
-				;;render the upload-csv html page
 				(generate-string {:status "You are authenticated"})
 				(render-file "public/login.html" {})))
 
